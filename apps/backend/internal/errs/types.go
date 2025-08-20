@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-func UnauthorizedError(message string, override bool) *HTTPError {
+func NewUnauthorizedError(message string, override bool) *HTTPError {
 	return &HTTPError{
 		Code:     MakeUpperCaseWithUnderscores(http.StatusText(http.StatusUnauthorized)),
 		Message:  message,
