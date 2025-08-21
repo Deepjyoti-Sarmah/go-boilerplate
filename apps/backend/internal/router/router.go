@@ -19,6 +19,8 @@ func NewRouter(s *server.Server, h *handler.Handlers, service *service.Service) 
 
 	router := echo.New()
 
+	router.HTTPErrorHandler = middlewares.Global.GlobalErrorHandler
+
 	// global middleware
 	router.Use(echoMiddleware.RateLimiterWithConfig(echoMiddleware.RateLimiterConfig{
 		Store: echoMiddleware.NewRateLimiterMemoryStore(rate.Limit(20)),
