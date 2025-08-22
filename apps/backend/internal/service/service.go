@@ -1,3 +1,4 @@
+// Package service
 package service
 
 import (
@@ -11,7 +12,7 @@ type Service struct {
 	Job  *job.JobService
 }
 
-func NewService(s *server.Server, repos *repository.Repositories) (*Service, error) {
+func NewServices(s *server.Server, repos *repository.Repositories) (*Service, error) {
 	authService := NewAuthService(s)
 
 	return &Service{

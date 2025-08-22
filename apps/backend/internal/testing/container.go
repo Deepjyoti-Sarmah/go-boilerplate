@@ -58,7 +58,7 @@ func SetupTestDB(t *testing.T) (*TestDB, func()) {
 	// Make sure the test cleans up the container
 	t.Cleanup(func() {
 		if err := pgContainer.Terminate(ctx); err != nil {
-			t.Logf("failed to terminate ccontainer: %v", err)
+			t.Logf("failed to terminate container: %v", err)
 		}
 	})
 
@@ -102,7 +102,7 @@ func SetupTestDB(t *testing.T) (*TestDB, func()) {
 	var db *database.Database
 	var lastErr error
 	for i := 0; i < 5; i++ {
-		// Sleep before first attept too to give PostgreSQL time to initialize
+		// Sleep before first attempt too to give PostgreSQL time to initialize
 		time.Sleep(2 * time.Second)
 
 		db, lastErr = database.New(cfg, &logger, nil)

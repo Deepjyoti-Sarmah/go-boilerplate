@@ -46,13 +46,13 @@ func main() {
 
 	// Initialize repositories, services, and handlers
 	repos := repository.NewRepositories(srv)
-	services, serviceErr := service.NewService(srv, repos)
+	services, serviceErr := service.NewServices(srv, repos)
 	if serviceErr != nil {
-		log.Fatal().Err(err).Msg("could not create services")
+		log.Fatal().Err(serviceErr).Msg("could not create services")
 	}
 	handlers := handler.NewHandlers(srv, services)
 
-	// Initialize routes
+	// Initialize router
 	r := router.NewRouter(srv, handlers, services)
 
 	// Setup HTTP server

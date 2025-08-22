@@ -10,7 +10,7 @@ type ObservabilityConfig struct {
 	Environment  string             `koanf:"environment" validate:"required"`
 	Logging      LoggingConfig      `koanf:"logging" validate:"required"`
 	NewRelic     NewRelicConfig     `koanf:"new_relic" validate:"required"`
-	HealthChecks HealthChecksConfig `koanf:"health_check" validate:"required"`
+	HealthChecks HealthChecksConfig `koanf:"health_checks" validate:"required"`
 }
 
 type LoggingConfig struct {
@@ -46,7 +46,7 @@ func DefaultObservabilityConfig() *ObservabilityConfig {
 			LicenseKey:                "",
 			AppLogForwardingEnabled:   true,
 			DistributedTracingEnabled: true,
-			DebugLogging:              false, // Disabled by default to avoide mixed log formats
+			DebugLogging:              false, // Disabled by default to avoid mixed log formats
 		},
 		HealthChecks: HealthChecksConfig{
 			Enabled:  true,
@@ -64,10 +64,7 @@ func (c *ObservabilityConfig) Validate() error {
 
 	// Validate log level
 	validLevels := map[string]bool{
-		"debug": true,
-		"info":  true,
-		"warn":  true,
-		"error": true,
+		"debug": true, "info": true, "warn": true, "error": true,
 	}
 	if !validLevels[c.Logging.Level] {
 		return fmt.Errorf("invalid logging level: %s (must be one of: debug, info, warn, error)", c.Logging.Level)
@@ -92,7 +89,6 @@ func (c *ObservabilityConfig) GetLogLevel() string {
 			return "debug"
 		}
 	}
-
 	return c.Logging.Level
 }
 
