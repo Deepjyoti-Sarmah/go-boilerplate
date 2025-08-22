@@ -1,7 +1,8 @@
-// Package errs
 package errs
 
-import "strings"
+import (
+	"strings"
+)
 
 type FieldError struct {
 	Field string `json:"field"`
@@ -17,7 +18,7 @@ const (
 type Action struct {
 	Type    ActionType `json:"type"`
 	Message string     `json:"message"`
-	Vaue    string     `json:"value"`
+	Value   string     `json:"value"`
 }
 
 type HTTPError struct {
